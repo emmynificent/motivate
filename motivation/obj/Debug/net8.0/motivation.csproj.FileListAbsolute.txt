@@ -170,3 +170,9 @@ C:\Users\Oluwaseun O\Desktop\asp\motivate\motivation\bin\Debug\net8.0\runtimes\w
 C:\Users\Oluwaseun O\Desktop\asp\motivate\motivation\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\Oluwaseun O\Desktop\asp\motivate\motivation\bin\Debug\net8.0\OpenAI.dll
 C:\Users\Oluwaseun O\Desktop\asp\motivate\motivation\obj\Debug\net8.0\motivation.sourcelink.json
+C:\Users\Oluwaseun O\Desktop\asp\motivate\motivation\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+C:\Users\Oluwaseun O\Desktop\asp\motivate\motivation\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\Oluwaseun O\Desktop\asp\motivate\motivation\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.dll
+C:\Users\Oluwaseun O\Desktop\asp\motivate\motivation\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\Oluwaseun O\Desktop\asp\motivate\motivation\bin\Debug\net8.0\Microsoft.Extensions.Http.dll
+C:\Users\Oluwaseun O\Desktop\asp\motivate\motivation\bin\Debug\net8.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll

@@ -3,6 +3,7 @@ using Motivation.Data;
 using Motivation.Interface;
 using Motivation.Repository;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -23,8 +24,19 @@ builder.Services.AddDbContext<MotivateDbContext>(options =>
 
 builder.Services.AddControllers();
 
+
+
 builder.Services.AddTransient<IEmotionRepository, EmotionRepository>();
 builder.Services.AddTransient<IQuoteRepository, QuoteRepository>();
+builder.Services.AddHttpClient<OpenAiService>();
+//builder.Services.AddSingleton<OpenAiService>(); 
+
+
+var apiKey = builder.Configuration["OpenAI:ApiKey"];
+if(string.IsNullOrEmpty(apiKey))
+{
+    throw new Exception("OpenAI API key is missing in configuration!");
+}
 
 
 var app = builder.Build();
@@ -35,6 +47,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+
 
 app.UseHttpsRedirection();
 

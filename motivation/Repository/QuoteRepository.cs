@@ -3,14 +3,18 @@ using Motivation.Data;
 using Motivation.Interface;
 using Motivation.Model;
 
+
+
 namespace Motivation.Repository
 {
     public class QuoteRepository : IQuoteRepository
     {
         private readonly MotivateDbContext _motivateDbContext;
 
-        public QuoteRepository(MotivateDbContext motivateDbContext)
-        {
+        private readonly OpenAiService _aiService;
+        public QuoteRepository(MotivateDbContext motivateDbContext, OpenAiService aiService)
+        {   
+            _aiService = aiService;
             _motivateDbContext = motivateDbContext;
         }
         public async Task<Quote> createQuoteAsync(Quote quote)
@@ -54,6 +58,11 @@ namespace Motivation.Repository
             var quote = await _motivateDbContext.quotes.Where(q => q.Id == quoteId)
             .FirstOrDefaultAsync();
             return quote;
+        }
+
+        public async Task<string> GenerateMotivationalQuoteAsync(string emotion)
+        {
+            return await _aiService.GenerateMotivationalQupteAsync(emotion);
         }
     }
 }

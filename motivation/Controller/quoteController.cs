@@ -30,17 +30,18 @@ namespace Motivation.Controller
             return Ok(quotes);
         }
 
-        [HttpGet ("retrieveQuote")]
-        public async Task<IActionResult> RetrieveByQuote(int quoteId)
-        {
-           var(isValid, errorResult) = ValidateQuoteId(quoteId);
-           if(!isValid)
-           {
-            return errorResult;
-           }
-           var quote = await _quoteRpository.retrieveByQuoteId(quoteId);
-           return HandleQuoteResult(quote, "Quote does not seem to exist");
-        }
+        // [HttpGet ("retrieveQuote")]
+        // public async Task<IActionResult?> RetrieveByQuote(int quoteId)
+        // {
+        //    var(isValid, errorResult) = ValidateQuoteId(quoteId);
+        //    if(!isValid)
+        //    {
+        //     return errorResult;
+        //    }
+        //    var quote = await _quoteRpository.retrieveByQuoteId(quoteId);
+        //    var quoteMap = _mapper.Map<quoteOutDto>(quote);
+        //    return HandleQuoteResult(quoteMap, "Quote does not seem to exist");
+        // }
 
         [HttpPost("createquote")]
         public async Task<IActionResult> CreateQuote(QuoteDto quote)
@@ -55,21 +56,21 @@ namespace Motivation.Controller
             return Ok(motivate);
         }
 
-        [HttpPost("deletequote")]
-        public async Task<IActionResult> deleteQuote (int quoteId)
-        {
-            var (isValid, errorResult) = ValidateQuoteId(quoteId);
-            if(!isValid)
-            {
-                return errorResult;
-            }
-            var quote = await _quoteRpository.retrieveByQuoteId(quoteId);
-            if(quote == null){
-                return NotFound("Check the Id Shared error");
-            }
-            await _quoteRpository.deleteQuoteAsync(quote);
-            return NoContent();
-        }
+        // [HttpPost("deletequote")]
+        // public async Task<IActionResult?> deleteQuote (int quoteId)
+        // {
+        //     var (isValid, errorResult) = ValidateQuoteId(quoteId);
+        //     if(!isValid)
+        //     {
+        //         return errorResult;
+        //     }
+        //     var quote = await _quoteRpository.retrieveByQuoteId(quoteId);
+        //     if(quote == null){
+        //         return NotFound("Check the Id Shared error");
+        //     }
+        //     await _quoteRpository.deleteQuoteAsync(quote);
+        //     return NoContent();
+        // }
 
         //get quote by emotion
         [HttpGet("quoteByEmotion")]
@@ -80,12 +81,27 @@ namespace Motivation.Controller
                 return BadRequest("does not exist");
             }
             var quote = await _quoteRpository.getQuotesByEmotionAsync(emotion);
-            if(quote == null)
+            var quoted = _mapper.Map<Quote>(quote);
+            if(quoted == null)
             {
                 return NotFound(" there's not quote for this emotion ");
             }
-            return Ok(quote);
+            return Ok(quoted);
         }
+
+        [HttpGet("generateQuote")]
+        public async Task<IActionResult> GenerateQuote(string emotion)
+        {
+            if(string.IsNullOrEmpty(emotion))
+            {
+                return BadRequest("Emotion cannot be empty.");
+            }
+
+            var quote = await _quoteRpository.GenerateMotivationalQuoteAsync(emotion);
+            return Ok(new{Emotion = emotion, Quote = quote});
+        }
+
+
         private (bool isValid, IActionResult? errorResult) ValidateQuoteId(int quoteId)
         {
             if(quoteId <= 0){
@@ -93,14 +109,12 @@ namespace Motivation.Controller
             }
             return (true, null);
         }
-        private IActionResult HandleQuoteResult(Quote quote, string notFoundMessage)
+        private IActionResult HandleQuoteResult(quoteOutDto quote, string notFoundMessage)
         {
             if(quote == null){
                 return NotFound(notFoundMessage);
             }
             return Ok(quote);
         }
-
-    }
-   
+    } 
 }

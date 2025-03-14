@@ -37,5 +37,11 @@ namespace Motivation.Repository
             var motion = await _motivateDbContext.emotions.FirstOrDefaultAsync(e => e.name == emotion);
             return motion;
         }
+
+        public async Task<Emotion> EmotionExistAsync(Emotion emotion)
+        {
+            var emotionExist = await _motivateDbContext.emotions.FindAsync(emotion.name);
+            return emotionExist;
+        }
     }
 }

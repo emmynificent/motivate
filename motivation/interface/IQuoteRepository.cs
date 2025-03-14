@@ -6,11 +6,11 @@ namespace Motivation.Interface
     {
         Task<Quote> createQuoteAsync(Quote quote);
         Task<ICollection<Quote>> listQuotesAsync();
-        // Task<Quote> saveQuoteAsync(Quote quote);
-        Task<bool> deleteQuoteAsync(Quote quoteId);
         Task<ICollection<Quote>> getQuotesByEmotionAsync (string emotion);
-        Task<Quote> retrieveByQuoteId (int quoteId);
+        // Task<Quote> saveQuoteAsync(Quote quote);
+        //Task<bool> deleteQuoteAsync(Quote quoteId);
+        //Task<Quote> retrieveByQuoteId (int quoteId);
         //get quote by emotion
-
+        Task<string> GenerateMotivationalQuoteAsync(string emotion);
     }
 }

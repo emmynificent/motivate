@@ -38,10 +38,13 @@ namespace Motivation.Controller
             {
                 return BadRequest("Invalid emotion data");
             }
+            // if(_emotionRepository.EmotionExistAsync(emotion))
+
             var createEmotion = _mapper.Map<Emotion>(emotion);
             var createdEmotion =  await _emotionRepository.createEmotionAsync(createEmotion);
             return Ok(createdEmotion);
         }
+
         [HttpGet ("GetEmotion")]
         public async Task<IActionResult> GetEmotion(string emotion)
         {

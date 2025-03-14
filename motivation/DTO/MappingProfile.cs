@@ -10,7 +10,9 @@ namespace Motivation.DTO
             CreateMap<Emotion, EmotionDto>();
             CreateMap<EmotionDto, Emotion>();
             CreateMap<QuoteDto, Quote>();
-            CreateMap<Quote, QuoteDto>();
+            CreateMap<Quote, QuoteDto>(); 
+            CreateMap<Quote, quoteOutDto>();
+            CreateMap<quoteOutDto,Quote>();
         }
     }
 }

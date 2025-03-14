@@ -7,3 +7,4 @@ namespace Motivation.Model
         public string? emotionDescription {get; set;}
     }
 }
+// this application aims at motivating, keep user going and also validate the way the feel when coding or trying to learn something.
